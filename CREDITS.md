@@ -11,3 +11,33 @@ Stock photos used inside post graphics. All from Unsplash (free, Unsplash Licens
 | br/BR-Post-2026-10-19-foto.png | photo-1544396821-4dd40b938ad3 |
 | br/BR-Post-2026-10-22-foto.png | photo-1620287920810-3f5b9746380c |
 | br/BR-Post-2026-10-23-foto.png | photo-1759255263592-a720f092de44 |
+
+## mspmargin/ (MSP Margin)
+Free Unsplash photos (Unsplash License), shown in greyscale inside branded graphics.
+- array-rows: Matthieu Beaumont
+- blade-lights: Domaintechnik
+- cable-network: Taylor Vick
+- calc-desk: Towfiqu barbhuiya
+- calc-glasses: Cht Gsml
+- calc-paper: Mediamodifier
+- chart-screen: Chris Liverani
+- charts-desk: Jakub Żerdzicki
+- code-screens: Jakub Żerdzicki
+- dash-laptop: Carlos Muza
+- dash-screen: Luke Chesser
+- dc-corridor: Paul Hanaoka
+- dc-white: Tony Marinescu
+- desk-review: Scott Graham
+- fiber-panel: Kirill Sh
+- paper-laptop: Jakub Żerdzicki
+- patch-ports: Jordan Harrison
+- patch-wires: Scott Rodgerson
+- rack-close: Tyler
+- rack-dark: Tyler
+- rack-glow: Krzysztof Kowalik
+- rack-orange: Kevin Ache
+- server-aisle: İsmail Enes Ayhan
+- sheet-desk: Gorilla ROI Data Connector
+- sheet-hands: Gorilla ROI Data Connector
+- sr-cabinets: Taylor Vick
+- tablet-charts: Jakub Żerdzicki
