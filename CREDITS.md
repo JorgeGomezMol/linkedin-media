@@ -41,3 +41,12 @@ Free Unsplash photos (Unsplash License), shown in greyscale inside branded graph
 - sheet-hands: Gorilla ROI Data Connector
 - sr-cabinets: Taylor Vick
 - tablet-charts: Jakub Żerdzicki
+| br/BR-Post-2026-10-26-foto.png | photo-1542621334-a254cf47733d |
+| dorsch/Dorsch-Post-2026-10-27-foto.png | photo-1762120657921-91314f1ae636 |
+| br/BR-Post-2026-10-28-foto.png | photo-1524661135-423995f22d0b |
+| dorsch/Dorsch-Post-2026-10-29-foto.png | photo-1761583780716-1553f9a70951 |
+| br/BR-Post-2026-10-30-foto.png | photo-1547394765-185e1e68f34e |
+| br/BR-Post-2026-10-26-pm-foto.png | photo-1510079647990-ae92b764500f |
+| br/BR-Post-2026-10-28-pm-foto.png | photo-1747056796419-f809b8cb7ade |
+| dorsch/Dorsch-Post-2026-10-30-pm-foto.png | photo-1629219644109-b4df0ab25a7b |
+| br/BR-Post-2026-10-30-pm-foto.png | photo-1654815439629-5e93cb7f74a1 |
