@@ -1,0 +1,476 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Serenium Finance · Controller fraccional bilingüe</title>
+<meta name="description" content="Controller fraccional bilingüe para empresas latinas en Estados Unidos. Tu contabilidad, lista el día 7 de cada mes, explicada en tu idioma.">
+<meta property="og:title" content="Serenium Finance · Tu contabilidad, lista el día 7">
+<meta property="og:description" content="Controller fraccional bilingüe para empresas latinas en Estados Unidos. Books closed by day 7, in English or Spanish.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://sereniumfinance.com/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%237A2430'/%3E%3Ctext x='32' y='45' font-family='Georgia,serif' font-size='44' fill='%23F5F3EE' text-anchor='middle'%3ES%3C/text%3E%3Crect x='18' y='51' width='28' height='2' fill='%23F5F3EE'/%3E%3Crect x='18' y='55' width='28' height='2' fill='%23F5F3EE'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Libre+Caslon+Display&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F5F3EE; --paper-2:#EDE9E1; --ink:#1C1A17; --ink-2:#3E3A35; --muted:#5E5850;
+  --ox:#7A2430; --ox-dark:#5E1B25; --rule:#E2DDD3; --line:#CFCAC0; --margin:#C98A90;
+  --display:'Libre Caslon Display', Georgia, 'Times New Roman', serif;
+  --serif:'Libre Caslon Text', Georgia, 'Times New Roman', serif;
+  --mono:'IBM Plex Mono', ui-monospace, Menlo, Consolas, monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);font-size:18px;line-height:1.6;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+html[lang="es"] .en{display:none!important}
+html[lang="en"] .es{display:none!important}
+a{color:var(--ink)} a:hover{color:var(--ox)}
+img{max-width:100%;display:block}
+.wrap{max-width:1160px;margin:0 auto;padding:0 32px}
+.mono{font-family:var(--mono)}
+.kicker{font-family:var(--mono);font-size:14px;color:var(--ox);letter-spacing:.02em;margin:0 0 18px}
+h1,h2,h3{font-family:var(--display);font-weight:400;margin:0;letter-spacing:-.01em;text-wrap:balance}
+h2{font-size:clamp(34px,4.4vw,52px);line-height:1.08}
+h3{font-size:24px;line-height:1.2}
+p{margin:0;text-wrap:pretty}
+.dbl{border-bottom:4px double var(--ox);padding-bottom:1px}
+.ledger{background-image:repeating-linear-gradient(to bottom,transparent 0 31px,var(--rule) 31px 32px)}
+.skip{position:absolute;left:-999px;top:0;background:var(--ink);color:var(--paper);padding:10px 14px;z-index:20}
+.skip:focus{left:12px;top:12px}
+
+/* nav */
+header{position:sticky;top:0;z-index:10;background:rgba(245,243,238,.94);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:24px;min-height:76px}
+.brand{display:flex;align-items:baseline;gap:10px;text-decoration:none}
+.brand b{font-family:var(--display);font-weight:400;font-size:28px;border-bottom:3px double var(--ink);line-height:1.1}
+.brand span{font-family:var(--mono);font-size:13px;color:var(--muted)}
+.links{display:flex;align-items:center;gap:28px;font-size:16px}
+.links a{text-decoration:none}
+.lang{display:inline-flex;border:1px solid var(--line);font-family:var(--mono);font-size:13px}
+.lang button{background:none;border:0;padding:0 12px;min-height:40px;min-width:44px;cursor:pointer;color:var(--muted);font:inherit}
+.lang button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 24px;font-family:var(--mono);font-size:14px;text-decoration:none;border:1px solid var(--ink);background:var(--ink);color:var(--paper);transition:background .15s}
+.btn:hover{background:var(--ox);border-color:var(--ox);color:var(--paper)}
+.btn.ox{background:var(--ox);border-color:var(--ox)}
+.btn.ox:hover{background:var(--ox-dark);border-color:var(--ox-dark)}
+.btn.ghost{background:transparent;color:var(--ink)}
+.btn.ghost:hover{background:var(--ink);color:var(--paper)}
+.nav .btn{min-height:44px;padding:0 18px}
+@media (max-width:900px){.links .hide-m{display:none}}
+
+/* hero */
+.hero{position:relative;padding:88px 0 96px;border-bottom:1px solid var(--line);overflow:hidden}
+.hero::before{content:"";position:absolute;top:0;bottom:0;left:max(16px,calc(50% - 612px));width:6px;border-left:1.5px solid var(--margin);border-right:1.5px solid var(--margin);opacity:.9}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:72px;align-items:center}
+.hero h1{font-size:clamp(48px,7vw,92px);line-height:.98;margin-bottom:28px}
+.hero h1 .seven{color:var(--ox);border-bottom:6px double var(--ox);line-height:.85;display:inline-block}
+.lead{font-size:21px;line-height:1.55;color:var(--ink-2);max-width:560px}
+.cta-row{display:flex;flex-wrap:wrap;align-items:center;gap:16px 28px;margin-top:36px}
+.cta-row .link{font-size:17px;text-underline-offset:5px}
+.cal-cap{font-style:italic;font-size:16px;color:var(--muted);margin-bottom:12px}
+.cal{border-top:2px solid var(--ink);display:grid;grid-template-columns:76px minmax(0,1fr);font-size:17px;background:var(--paper)}
+.cal > *{padding:14px 0;border-bottom:1px solid var(--line)}
+.cal .d{font-family:var(--mono);font-size:14px;color:var(--muted);padding-top:17px}
+.cal .t b{font-weight:400;display:block}
+.cal .t small{display:block;font-size:14px;color:var(--muted);line-height:1.4;margin-top:2px}
+.cal .last{border-bottom:4px double var(--ink)}
+.cal .d.last{color:var(--ox);font-weight:500}
+.cal .t.last b{font-weight:700}
+
+/* band */
+.band{background:var(--ink);color:var(--paper)}
+.band .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px 32px;padding-top:22px;padding-bottom:22px}
+.band p{font-family:var(--display);font-size:24px}
+.band .mono{font-size:14px;color:#D8D2C7}
+
+section{padding:104px 0}
+.head{max-width:760px;margin-bottom:56px}
+.head p.sub{font-size:19px;color:var(--ink-2);margin-top:18px}
+
+/* problem */
+.cols3{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(280px,100%),1fr));gap:40px}
+.item{border-top:1px solid var(--ink);padding-top:20px}
+.item .n{font-family:var(--mono);font-size:13px;color:var(--ox);display:block;margin-bottom:12px}
+.item h3{margin-bottom:12px}
+.item p{color:var(--ink-2);font-size:17px}
+
+/* steps */
+.alt{background:var(--paper-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(280px,100%),1fr));gap:0;border-top:2px solid var(--ink)}
+.step{padding:28px 32px 32px 0;border-bottom:1px solid var(--line)}
+.step .n{font-family:var(--display);font-size:56px;line-height:1;color:var(--ox);display:block;margin-bottom:14px}
+.step h3{margin-bottom:10px}
+.step p{color:var(--ink-2);font-size:17px}
+.step .price{font-family:var(--mono);font-size:14px;color:var(--ink);margin-top:14px;display:block}
+
+/* plans */
+.plans{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr));gap:24px;align-items:stretch}
+.plan{border:1px solid var(--line);background:var(--paper);padding:32px;display:flex;flex-direction:column;gap:18px}
+.plan.rec{border:1px solid var(--ink);box-shadow:6px 6px 0 var(--ink)}
+.plan .tag{font-family:var(--mono);font-size:12px;color:var(--paper);background:var(--ox);align-self:flex-start;padding:4px 10px}
+.plan h3{font-size:30px}
+.plan .amt{font-family:var(--display);font-size:46px;line-height:1}
+.plan .amt small{font-family:var(--mono);font-size:14px;color:var(--muted)}
+.plan .what{color:var(--ink-2);font-size:17px}
+.plan ul{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.plan li{padding:10px 0 10px 26px;border-bottom:1px solid var(--line);font-size:16px;position:relative}
+.plan li::before{content:"";position:absolute;left:0;top:19px;width:12px;border-top:3px double var(--ox)}
+.plan .lim{font-family:var(--mono);font-size:13px;color:var(--muted);margin-top:auto}
+.projects{margin-top:48px;border-top:2px solid var(--ink)}
+.proj{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px 24px;padding:16px 0;border-bottom:1px solid var(--line);align-items:baseline}
+.proj b{font-weight:700}
+.proj span{color:var(--ink-2);font-size:16px}
+.proj .mono{font-size:14px;white-space:nowrap}
+.note{font-size:15px;color:var(--muted);margin-top:18px}
+
+/* who */
+.who .item h3{font-size:26px}
+
+/* tech */
+.tech{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(280px,100%),1fr));gap:40px}
+
+/* about */
+.about{display:grid;grid-template-columns:minmax(0,340px) minmax(0,1fr);gap:72px;align-items:start}
+.portrait{aspect-ratio:4/5;background:var(--ox);display:flex;align-items:center;justify-content:center;position:relative}
+.portrait span{font-family:var(--display);font-size:180px;color:var(--paper);line-height:.9;border-bottom:7px double var(--paper);padding:0 8px 4px}
+.portrait img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.about h2{margin-bottom:24px}
+.about p+p{margin-top:16px}
+.about p{color:var(--ink-2)}
+.about p.kicker{color:var(--ox)}
+.badges{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}
+.badges > span{font-family:var(--mono);font-size:13px;border:1px solid var(--line);padding:8px 12px;background:var(--paper)}
+
+/* faq */
+.faq{border-top:2px solid var(--ink);max-width:860px}
+.faq details{border-bottom:1px solid var(--line)}
+.faq summary{cursor:pointer;list-style:none;padding:22px 40px 22px 0;font-family:var(--display);font-size:24px;position:relative}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";position:absolute;right:4px;top:18px;font-family:var(--mono);font-size:24px;color:var(--ox)}
+.faq details[open] summary::after{content:"–"}
+.faq details p{padding:0 0 24px;color:var(--ink-2);max-width:720px}
+
+/* closing */
+.closing{background:var(--ox);color:var(--paper);text-align:center}
+.closing h2{font-size:clamp(40px,6vw,72px);margin-bottom:20px}
+.closing p{font-size:20px;color:#F1E6E3;max-width:620px;margin:0 auto}
+.closing .cta-row{justify-content:center}
+.closing .btn{background:var(--paper);color:var(--ink);border-color:var(--paper)}
+.closing .btn:hover{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.closing a.mail{color:var(--paper);text-underline-offset:5px}
+
+footer{padding:48px 0 56px;font-size:14px;color:var(--muted)}
+footer .row{display:flex;flex-wrap:wrap;justify-content:space-between;gap:24px;align-items:flex-start}
+footer p{max-width:680px}
+
+@media (max-width:900px){
+  .hero{padding:56px 0 64px}
+  .hero::before{display:none}
+  .hero-grid,.about{grid-template-columns:minmax(0,1fr);gap:48px}
+  .portrait{max-width:320px}
+  section{padding:72px 0}
+  .step{padding-right:0}
+}
+@media (max-width:560px){
+  .wrap{padding:0 16px}
+  body{font-size:17px}
+  .nav{min-height:64px;gap:12px}
+  .brand b{font-size:24px}
+  .brand span{display:none}
+  .links{gap:10px}
+  .nav .btn{display:none}
+  .plan{padding:24px}
+  .plan.rec{box-shadow:4px 4px 0 var(--ink)}
+  .proj{grid-template-columns:minmax(0,1fr)}
+  .faq summary{font-size:21px}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main"><span class="es">Saltar al contenido</span><span class="en">Skip to content</span></a>
+
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="#top" aria-label="Serenium Finance"><b>Serenium</b><span>finance</span></a>
+    <nav class="links" aria-label="Principal">
+      <a class="hide-m" href="#planes"><span class="es">Planes</span><span class="en">Plans</span></a>
+      <a class="hide-m" href="#como"><span class="es">Cómo trabajamos</span><span class="en">How it works</span></a>
+      <a class="hide-m" href="#nosotros"><span class="es">Nosotros</span><span class="en">About</span></a>
+      <a class="hide-m" href="#preguntas"><span class="es">Preguntas</span><span class="en">FAQ</span></a>
+      <div class="lang" role="group" aria-label="Idioma / Language">
+        <button type="button" data-set-lang="es" aria-pressed="true">ES</button>
+        <button type="button" data-set-lang="en" aria-pressed="false">EN</button>
+      </div>
+      <a class="btn" href="#contacto"><span class="es">Agenda una llamada</span><span class="en">Book a call</span></a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+<section class="hero ledger" id="top" style="padding-top:88px">
+  <div class="wrap hero-grid">
+    <div>
+      <p class="kicker"><span class="es">Controller fraccional · Empresas latinas en EE. UU.</span><span class="en">Fractional controller · Latino-owned U.S. businesses</span></p>
+      <h1>
+        <span class="es">Tu contabilidad, lista el día <span class="seven">7</span>.</span>
+        <span class="en">Books closed by day <span class="seven">7</span>.</span>
+      </h1>
+      <p class="lead">
+        <span class="es">Cerramos la contabilidad de tu empresa cada mes, te entregamos estados financieros claros y te los explicamos en tu idioma. Siempre con la misma persona.</span>
+        <span class="en">We close your books every month, deliver clear financial statements and walk you through them in English or Spanish. Always with the same person.</span>
+      </p>
+      <div class="cta-row">
+        <a class="btn ox" href="#contacto"><span class="es">Agenda una llamada de 30 minutos</span><span class="en">Book a 30-minute call</span></a>
+        <a class="link" href="#planes"><span class="es">Ver planes y precios</span><span class="en">See plans and pricing</span></a>
+      </div>
+    </div>
+    <div>
+      <p class="cal-cap"><span class="es">Así se cierra tu mes</span><span class="en">How your month closes</span></p>
+      <div class="cal">
+        <span class="d">01–02</span>
+        <span class="t"><b class="es">Entran bancos y tarjetas</b><b class="en">Bank and card activity in</b><small class="es">Movimientos clasificados y listos para revisar</small><small class="en">Transactions categorized and ready for review</small></span>
+        <span class="d">03–04</span>
+        <span class="t"><b class="es">Todo cuadra con el banco</b><b class="en">Every account reconciled</b><small class="es">Bancos, tarjetas, préstamos y procesadores de pago</small><small class="en">Banks, cards, loans and payment processors</small></span>
+        <span class="d">05</span>
+        <span class="t"><b class="es">Ajustes de cierre</b><b class="en">Closing entries</b><small class="es">Lo que se debe, lo que se pagó por adelantado, la depreciación</small><small class="en">Accruals, prepaids, deferred revenue, depreciation</small></span>
+        <span class="d">06</span>
+        <span class="t"><b class="es">Revisión del controller</b><b class="en">Controller review</b><small class="es">Cada variación explicada y documentada</small><small class="en">Variances explained and documented</small></span>
+        <span class="d last">07</span>
+        <span class="t last"><b class="es">Estados financieros y llamada</b><b class="en">Statements delivered, plus a call</b><small class="es">Resultados, balance, flujo de caja e indicadores</small><small class="en">P&amp;L, balance sheet, cash flow and KPIs</small></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="band">
+  <div class="wrap">
+    <p><span class="es">Máximo ocho empresas. Un controller senior. Sin intermediarios.</span><span class="en">Eight clients, max. One senior controller. No hand-offs.</span></p>
+    <span class="mono"><span class="es">Cupos limitados para el primer trimestre de 2027</span><span class="en">Limited openings for Q1 2027</span></span>
+  </div>
+</div>
+
+<section id="problema">
+  <div class="wrap">
+    <div class="head">
+      <p class="kicker"><span class="es">¿Te suena?</span><span class="en">Sound familiar?</span></p>
+      <h2><span class="es">Tu empresa ya creció más que tu contabilidad.</span><span class="en">Your business has outgrown its bookkeeping.</span></h2>
+      <p class="sub"><span class="es">Ya no basta con alguien que registre facturas, pero tampoco necesitas un controller de tiempo completo.</span><span class="en">Someone entering invoices isn't enough anymore, but you don't need a full-time controller either.</span></p>
+    </div>
+    <div class="cols3">
+      <div class="item"><span class="n">01</span>
+        <h3><span class="es">Ves los números tarde</span><span class="en">Your numbers arrive late</span></h3>
+        <p><span class="es">Tomas decisiones con información de hace dos o tres meses, y nadie te puede decir si está bien.</span><span class="en">You decide with numbers from two or three months ago, and nobody can tell you if they're right.</span></p></div>
+      <div class="item"><span class="n">02</span>
+        <h3><span class="es">Nada cuadra</span><span class="en">Nothing ties out</span></h3>
+        <p><span class="es">El banco dice una cosa, QuickBooks otra y el procesador de pagos otra. Y no sabes cuál creer.</span><span class="en">The bank says one thing, QuickBooks another, your payment processor a third. You don't know which to trust.</span></p></div>
+      <div class="item"><span class="n">03</span>
+        <h3><span class="es">Fin de año es un incendio</span><span class="en">Year-end is a fire drill</span></h3>
+        <p><span class="es">Tu preparador de impuestos pasa semanas organizando antes de poder empezar tu declaración, y eso lo pagas tú.</span><span class="en">Your tax preparer spends weeks cleaning up before they can start your return, and you pay for it.</span></p></div>
+    </div>
+  </div>
+</section>
+
+<section class="alt" id="como">
+  <div class="wrap">
+    <div class="head">
+      <p class="kicker"><span class="es">Cómo trabajamos</span><span class="en">How it works</span></p>
+      <h2><span class="es">Tres pasos. Después, el mismo cierre cada mes.</span><span class="en">Three steps. Then the same close, every month.</span></h2>
+    </div>
+    <div class="steps">
+      <div class="step"><span class="n">1</span>
+        <h3><span class="es">Diagnóstico financiero</span><span class="en">Finance Ops Review</span></h3>
+        <p><span class="es">En una semana revisamos tu contabilidad, tus sistemas y tus controles. Te entregamos por escrito lo que encontramos y un plan.</span><span class="en">In one week we review your books, systems and controls, and hand you written findings and a plan.</span></p>
+        <span class="price"><span class="es">$950 · se descuenta de tu primer mes</span><span class="en">$950 · credited to your first month</span></span></div>
+      <div class="step"><span class="n">2</span>
+        <h3><span class="es">Puesta en orden</span><span class="en">Onboarding</span></h3>
+        <p><span class="es">De dos a tres semanas. Accesos seguros, un plan de cuentas limpio, reglas bancarias que funcionan y saldos iniciales que cuadran.</span><span class="en">Two to three weeks. Secure access, a clean chart of accounts, bank rules that work and opening balances that tie.</span></p></div>
+      <div class="step"><span class="n">3</span>
+        <h3><span class="es">Lista el día 7</span><span class="en">Closed by day 7</span></h3>
+        <p><span class="es">Cada mes, la misma lista de cierre, los mismos reportes y la misma persona. Números con los que puedes decidir.</span><span class="en">Every month, the same checklist, the same reports, the same person. Numbers you can act on.</span></p></div>
+    </div>
+  </div>
+</section>
+
+<section id="planes">
+  <div class="wrap">
+    <div class="head">
+      <p class="kicker"><span class="es">Planes</span><span class="en">Plans</span></p>
+      <h2><span class="es">Tarifa fija mensual. Alcance por escrito.</span><span class="en">Flat monthly fees. Scope in writing.</span></h2>
+      <p class="sub"><span class="es">Sin cobros por hora ni sorpresas. Si tu empresa crece más allá de su plan, lo hablamos antes de cambiar nada.</span><span class="en">No hourly surprises. If your business outgrows its plan, we talk about it before anything changes.</span></p>
+    </div>
+    <div class="plans">
+      <article class="plan">
+        <h3>Close</h3>
+        <p class="amt">$1,750 <small><span class="es">/ mes</span><span class="en">/ month</span></small></p>
+        <p class="what"><span class="es">Contabilidad limpia y conciliada cada mes.</span><span class="en">Clean, reconciled books every month.</span></p>
+        <ul>
+          <li><span class="es">Cierre antes del día hábil 10</span><span class="en">Closed by business day 10</span></li>
+          <li><span class="es">Bancos, tarjetas y préstamos conciliados</span><span class="en">Every bank, card and loan reconciled</span></li>
+          <li><span class="es">Estado de resultados, balance y flujo de caja</span><span class="en">Monthly P&amp;L, balance sheet and cash flow</span></li>
+          <li><span class="es">Paquete de fin de año para tu preparador de impuestos</span><span class="en">Year-end package for your tax preparer</span></li>
+          <li><span class="es">Llamada mensual de 30 minutos</span><span class="en">30-minute monthly call</span></li>
+        </ul>
+        <p class="lim"><span class="es">1 empresa · hasta 8 cuentas · ~300 movimientos al mes</span><span class="en">1 entity · up to 8 accounts · ~300 transactions a month</span></p>
+      </article>
+      <article class="plan rec">
+        <span class="tag"><span class="es">Recomendado</span><span class="en">Recommended</span></span>
+        <h3>Controller</h3>
+        <p class="amt">$3,500 <small><span class="es">/ mes</span><span class="en">/ month</span></small></p>
+        <p class="what"><span class="es">Cierre completo y un controller a tu lado.</span><span class="en">Full accrual close and a controller on call.</span></p>
+        <ul>
+          <li><span class="es">Todo lo de Close, listo el día hábil 7</span><span class="en">Everything in Close, by business day 7</span></li>
+          <li><span class="es">Contabilidad en base devengado: ingresos y gastos en el mes que corresponden</span><span class="en">Full accrual: accruals, prepaids, deferred revenue, fixed assets</span></li>
+          <li><span class="es">Seguimiento de cobros y preparación de pagos</span><span class="en">Collections and bill-pay preparation</span></li>
+          <li><span class="es">Impuesto sobre las ventas (sales tax) en hasta 2 estados</span><span class="en">Sales tax in up to 2 states</span></li>
+          <li><span class="es">Presupuesto vs. real e indicadores clave</span><span class="en">Budget vs. actual and a KPI dashboard</span></li>
+          <li><span class="es">Llamada semanal de 30 minutos y contacto con tu preparador</span><span class="en">Weekly 30-minute call, tax preparer liaison</span></li>
+        </ul>
+        <p class="lim"><span class="es">1 empresa + 1 relacionada · hasta 15 cuentas · ~800 movimientos al mes</span><span class="en">1 entity + 1 related · up to 15 accounts · ~800 transactions a month</span></p>
+      </article>
+      <article class="plan">
+        <h3>Controller Plus</h3>
+        <p class="amt"><span class="es" style="font-family:var(--mono);font-size:14px;color:var(--muted)">desde </span><span class="en" style="font-family:var(--mono);font-size:14px;color:var(--muted)">from </span>$5,500 <small><span class="es">/ mes</span><span class="en">/ month</span></small></p>
+        <p class="what"><span class="es">Varias empresas, una sola vista.</span><span class="en">Multiple entities, one consolidated view.</span></p>
+        <ul>
+          <li><span class="es">Todo lo de Controller</span><span class="en">Everything in Controller</span></li>
+          <li><span class="es">Varias empresas y operaciones entre ellas</span><span class="en">Multi-entity and intercompany</span></li>
+          <li><span class="es">Empresas en EE. UU. y Latinoamérica coordinadas</span><span class="en">U.S. and Latin America entities coordinated</span></li>
+          <li><span class="es">Proyección de caja a 13 semanas</span><span class="en">13-week cash forecast</span></li>
+          <li><span class="es">Reportes para el banco, socios o inversionistas</span><span class="en">Lender, board or investor package</span></li>
+        </ul>
+        <p class="lim"><span class="es">Hasta 3 empresas · revisión trimestral incluida</span><span class="en">Up to 3 entities · quarterly review included</span></p>
+      </article>
+    </div>
+    <div class="projects">
+      <div class="proj"><span><b><span class="es">Diagnóstico financiero</span><span class="en">Finance Ops Review</span></b> — <span class="es">una semana, hallazgos y plan por escrito</span><span class="en">one week, written findings and plan</span></span><span class="mono"><span class="es">$950 · se descuenta del primer mes</span><span class="en">$950 · credited to month one</span></span></div>
+      <div class="proj"><span><b><span class="es">Puesta al día</span><span class="en">Books Rescue</span></b> — <span class="es">meses atrasados o desordenados</span><span class="en">months behind or messy books</span></span><span class="mono"><span class="es">desde $2,500 · precio fijo</span><span class="en">from $2,500 · fixed quote</span></span></div>
+      <div class="proj"><span><b><span class="es">Migración a QuickBooks Online</span><span class="en">QuickBooks Online migration</span></b> — <span class="es">desde Desktop, con limpieza del plan de cuentas</span><span class="en">from Desktop, with chart of accounts cleanup</span></span><span class="mono"><span class="es">desde $1,500</span><span class="en">from $1,500</span></span></div>
+    </div>
+    <p class="note"><span class="es">No preparamos declaraciones de renta ni hacemos auditorías: trabajamos junto a tu preparador de impuestos y le entregamos la contabilidad lista.</span><span class="en">We don't prepare income tax returns or perform audits. We work alongside your tax preparer and hand them year-end-ready books.</span></p>
+  </div>
+</section>
+
+<section class="alt who" id="para-quien">
+  <div class="wrap">
+    <div class="head">
+      <p class="kicker"><span class="es">Para quién</span><span class="en">Who we work with</span></p>
+      <h2><span class="es">Empresas que conocemos por dentro.</span><span class="en">Businesses we know from the inside.</span></h2>
+    </div>
+    <div class="cols3">
+      <div class="item"><span class="n">01</span>
+        <h3><span class="es">Empresas latinas en EE. UU.</span><span class="en">Latino-owned U.S. businesses</span></h3>
+        <p><span class="es">Construcción, transporte, salud, restaurantes, servicios. De $1 a $20 millones al año, con empleados y un dueño que quiere entender sus números, en su idioma.</span><span class="en">Construction, transportation, healthcare, restaurants, services. $1M–$20M a year, with employees and an owner who wants to understand the numbers in their own language.</span></p></div>
+      <div class="item"><span class="n">02</span>
+        <h3><span class="es">Empresas con equipo en Latinoamérica</span><span class="en">U.S. companies with LATAM teams</span></h3>
+        <p><span class="es">Empresas hermanas, nómina en Colombia o México, transferencias entre países. Contabilidad bilingüe que tiene sentido en ambos lados.</span><span class="en">Sister entities, payroll in Colombia or Mexico, cross-border transfers. Bilingual books that make sense on both sides.</span></p></div>
+      <div class="item"><span class="n">03</span>
+        <h3><span class="es">Negocios con muchos pagos</span><span class="en">High-volume payment businesses</span></h3>
+        <p><span class="es">Miles de cobros por tarjeta o plataformas, depósitos difíciles de rastrear e impuesto sobre las ventas en varios estados.</span><span class="en">Thousands of card or platform payments, deposits that are hard to trace and sales tax in several states.</span></p></div>
+    </div>
+  </div>
+</section>
+
+<section id="tecnologia">
+  <div class="wrap">
+    <div class="head">
+      <p class="kicker"><span class="es">Cómo usamos la tecnología</span><span class="en">How we use automation</span></p>
+      <h2><span class="es">La tecnología prepara. Una persona revisa y firma.</span><span class="en">Automation prepares. A person reviews and signs off.</span></h2>
+    </div>
+    <div class="tech">
+      <div class="item"><h3><span class="es">Nada entra sin revisión</span><span class="en">Nothing posts unreviewed</span></h3>
+        <p><span class="es">Las herramientas clasifican y concilian; cada cierre se revisa línea por línea antes de llegar a ti.</span><span class="en">Tools categorize and match; every close is reviewed line by line before it reaches you.</span></p></div>
+      <div class="item"><h3><span class="es">Cada ajuste se explica</span><span class="en">Every adjustment is explained</span></h3>
+        <p><span class="es">Cada asiento lleva una nota: qué se revisó, qué se descartó y por qué.</span><span class="en">Each entry carries a memo: what was tested, what was ruled out and why.</span></p></div>
+      <div class="item"><h3><span class="es">Tus datos, protegidos</span><span class="en">Your data, protected</span></h3>
+        <p><span class="es">Acceso como usuario contador con verificación en dos pasos. Preparamos los pagos; tú los apruebas y los liberas.</span><span class="en">Accountant-level access with two-factor authentication. We prepare payments; you approve and release them.</span></p></div>
+    </div>
+  </div>
+</section>
+
+<section class="alt" id="nosotros">
+  <div class="wrap about">
+    <div class="portrait" role="img" aria-label="Jorge Gómez Molina">
+      <span aria-hidden="true">S</span>
+      <!-- Para poner la foto: sube jorge.jpg junto a este archivo y quita los guiones de la línea siguiente -->
+      <!-- <img src="jorge.jpg" alt="Jorge Gómez Molina"> -->
+    </div>
+    <div>
+      <p class="kicker"><span class="es">Quién está detrás</span><span class="en">Who you'll work with</span></p>
+      <h2>Jorge Gómez Molina</h2>
+      <p><span class="es">Llevo más de ocho años cerrando la contabilidad de empresas en Estados Unidos: como bookkeeper senior de una firma de propiedad intelectual con agentes en toda Latinoamérica, como gerente de contabilidad de un grupo de concesionarios y bienes raíces en Florida, y como controller financiero de una empresa de servicios de tecnología.</span><span class="en">I've spent more than eight years closing the books for U.S. companies: as senior bookkeeper for an intellectual property firm with agents across Latin America, as accounting manager for a Florida dealership and real estate group, and as financial controller for an IT services company.</span></p>
+      <p><span class="es">En Serenium trabajo con pocas empresas a la vez para darle a cada dueño esa misma atención senior, sin que tenga que contratar un controller de tiempo completo. Trabajo en horario del Este de EE. UU., en español y en inglés.</span><span class="en">At Serenium I work with a small number of companies so each owner gets that same senior attention without hiring a full-time controller. I work U.S. Eastern hours, in English and Spanish.</span></p>
+      <div class="badges">
+        <span>QuickBooks ProAdvisor</span>
+        <span>IMA Professional Member</span>
+        <span>ACFE Associate Member</span>
+        <span><span class="es">Español / Inglés</span><span class="en">English / Spanish</span></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="preguntas">
+  <div class="wrap">
+    <div class="head">
+      <p class="kicker"><span class="es">Preguntas frecuentes</span><span class="en">FAQ</span></p>
+      <h2><span class="es">Lo que nos preguntan antes de empezar.</span><span class="en">What owners ask before we start.</span></h2>
+    </div>
+    <div class="faq">
+      <details><summary><span class="es">¿Son contadores públicos (CPA)?</span><span class="en">Are you a CPA firm?</span></summary>
+        <p><span class="es">No. Serenium se encarga de la contabilidad mensual y el control financiero, no de declaraciones de renta ni auditorías. Trabajamos junto a tu preparador de impuestos o firma de CPA y le entregamos la contabilidad lista para el cierre del año.</span><span class="en">No. Serenium provides monthly accounting and controllership, not tax returns or audits. We work alongside your tax preparer or CPA firm and hand them clean, year-end-ready books.</span></p></details>
+      <details><summary><span class="es">¿Quién hace mis impuestos?</span><span class="en">Who does my taxes?</span></summary>
+        <p><span class="es">Tu preparador de impuestos. El impuesto sobre las ventas (sales tax) está incluido en los planes Controller; la declaración de renta sigue con tu profesional de impuestos.</span><span class="en">Your tax professional. Sales tax filings are included in the Controller plans; income tax returns stay with your tax preparer.</span></p></details>
+      <details><summary><span class="es">¿Quién ve mis datos? ¿Pueden mover mi dinero?</span><span class="en">Who sees my data? Can you move my money?</span></summary>
+        <p><span class="es">Solo trabajamos con acceso de usuario contador y verificación en dos pasos, nunca con tu contraseña. Podemos preparar pagos, pero tú los apruebas y los liberas.</span><span class="en">We only work through accountant-level access with two-factor authentication, never your password. We can prepare payments; you approve and release them.</span></p></details>
+      <details><summary><span class="es">¿Trabajan con empresas en cualquier estado?</span><span class="en">Do you work with businesses in any state?</span></summary>
+        <p><span class="es">Sí. Trabajamos de forma remota con empresas en todo Estados Unidos, en horario del Este.</span><span class="en">Yes. We work remotely with businesses across the U.S., on Eastern time.</span></p></details>
+      <details><summary><span class="es">¿Qué pasa si mi empresa crece?</span><span class="en">What if I outgrow my plan?</span></summary>
+        <p><span class="es">Si pasas los límites de tu plan dos meses seguidos, subimos de plan, siempre acordado antes. Cualquier trabajo fuera del plan se cotiza por escrito primero.</span><span class="en">If you exceed your plan's limits two months in a row, we move up a plan, agreed in advance. Anything outside the plan is quoted in writing first.</span></p></details>
+    </div>
+  </div>
+</section>
+
+<section class="closing" id="contacto">
+  <div class="wrap">
+    <h2><span class="es">Revisemos tus números.</span><span class="en">Let's look at your numbers.</span></h2>
+    <p><span class="es">Una llamada de 30 minutos para ver si Serenium es para tu empresa. No necesitas preparar nada.</span><span class="en">A 30-minute call to see if Serenium is a fit. No preparation needed.</span></p>
+    <div class="cta-row">
+      <!-- Cambia el href por tu enlace de reserva (Google Calendar o Calendly) cuando lo tengas -->
+      <a class="btn" id="book" href="mailto:hello@sereniumfinance.com?subject=Llamada%20con%20Serenium%20Finance"><span class="es">Agenda una llamada</span><span class="en">Book a call</span></a>
+      <a class="mail" href="mailto:hello@sereniumfinance.com">hello@sereniumfinance.com</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap row">
+    <a class="brand" href="#top" aria-label="Serenium Finance"><b>Serenium</b><span>finance</span></a>
+    <p><span class="es">Serenium Finance es un nombre comercial de Serenium Management Group LLC. Serenium no es una firma de contadores públicos (CPA) y no prepara declaraciones de impuestos sobre la renta ni presta servicios de auditoría o atestación.</span><span class="en">Serenium Finance is a trade name of Serenium Management Group LLC. Serenium is not a CPA firm and does not provide income tax return preparation, audit or attest services.</span> © <span id="yr">2026</span> Serenium Management Group LLC</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var html=document.documentElement, btns=document.querySelectorAll('[data-set-lang]');
+  function set(l){
+    html.setAttribute('lang',l);
+    btns.forEach(function(b){b.setAttribute('aria-pressed', b.getAttribute('data-set-lang')===l?'true':'false')});
+    document.title = l==='es' ? 'Serenium Finance · Controller fraccional bilingüe' : 'Serenium Finance · Bilingual fractional controller';
+    var bk=document.getElementById('book');
+    if(bk && bk.href.indexOf('mailto:')===0){
+      bk.href='mailto:hello@sereniumfinance.com?subject='+encodeURIComponent(l==='es'?'Llamada con Serenium Finance':'Call with Serenium Finance');
+    }
+    try{localStorage.setItem('serenium-lang',l)}catch(e){}
+  }
+  var saved=null; try{saved=localStorage.getItem('serenium-lang')}catch(e){}
+  var q=(location.search.match(/[?&]lang=(es|en)/)||[])[1];
+  set(q||saved||'es');
+  btns.forEach(function(b){b.addEventListener('click',function(){set(b.getAttribute('data-set-lang'))})});
+  document.getElementById('yr').textContent=new Date().getFullYear();
+})();
+</script>
+</body>
+</html>
