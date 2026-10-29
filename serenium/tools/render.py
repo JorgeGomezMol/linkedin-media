@@ -11,7 +11,8 @@ Layout fields:
   number     number (e.g. "7", "40%"), title (short line), body (optional source/explanation)
   checklist  title, items (3-5 short strings)
   quote      title (one strong sentence), body (optional attribution / context)
-Optional: footer (defaults to "Serenium Finance  ·  Fractional controller  ·  English / Español")
+Optional: footer (defaults to "Fractional controller  ·  English / Español")
+          format  "li" (default, 1200x627 LinkedIn) | "ig" (1080x1350 Instagram/Facebook feed)
 """
 import json, sys, html, pathlib
 from playwright.sync_api import sync_playwright
@@ -51,6 +52,31 @@ body {{
 .quote {{ font-family: 'CaslonText', Georgia, serif; font-style: italic; font-size: 50px; line-height: 1.2; color: #1C1A17; text-wrap: balance; }}
 .foot {{ display: flex; justify-content: space-between; align-items: baseline; font-family: 'PlexMono', monospace; font-size: 15px; color: #5E5850; }}
 .mark {{ font-family: 'CaslonDisplay', Georgia, serif; font-size: 26px; color: #1C1A17; border-bottom: 3px double #1C1A17; line-height: 1.15; }}
+.body.small {{ font-size: 22px; }}
+.title.listtitle {{ font-size: 44px; }}
+.body.attr {{ font-size: 22px; font-family: 'PlexMono', monospace; color: #5E5850; }}
+/* Instagram / Facebook feed 1080x1350 */
+html.ig, html.ig body {{ width: 1080px; height: 1350px; }}
+html.ig body {{ background-image: repeating-linear-gradient(to bottom, transparent 0 44px, #E2DDD3 44px 45px); }}
+html.ig .margin {{ left: 84px; width: 9px; }}
+html.ig .page {{ left: 140px; right: 84px; top: 110px; bottom: 100px; }}
+html.ig .kicker {{ font-size: 28px; }}
+html.ig .content {{ gap: 40px; }}
+html.ig .title {{ font-size: 104px; line-height: 1.02; }}
+html.ig .title.long {{ font-size: 84px; }}
+html.ig .body {{ font-size: 38px; line-height: 1.42; max-width: none; }}
+html.ig .dbl {{ border-bottom-width: 8px; }}
+html.ig .row {{ flex-direction: column; align-items: flex-start; gap: 44px; }}
+html.ig .num {{ font-size: 260px; border-bottom-width: 12px; }}
+html.ig .list {{ grid-template-columns: 80px 1fr; font-size: 40px; }}
+html.ig .list span {{ padding: 22px 0; }}
+html.ig .list .n {{ font-size: 26px; padding-top: 32px; }}
+html.ig .quote {{ font-size: 78px; }}
+html.ig .foot {{ font-size: 22px; }}
+html.ig .body.small {{ font-size: 34px; }}
+html.ig .title.listtitle {{ font-size: 64px; }}
+html.ig .body.attr {{ font-size: 30px; }}
+html.ig .mark {{ font-size: 42px; border-bottom-width: 5px; }}
 """
 
 def esc(s):
@@ -66,19 +92,20 @@ def build(spec):
     elif lay == "number":
         inner = (f'<div class="row"><span class="num">{esc(spec.get("number"))}</span>'
                  f'<div style="display:flex;flex-direction:column;gap:16px">'
-                 f'<p class="title long">{title}</p>' + (f'<p class="body" style="font-size:22px">{body}</p>' if body else "") + '</div></div>')
+                 f'<p class="title long">{title}</p>' + (f'<p class="body small">{body}</p>' if body else "") + '</div></div>')
     elif lay == "checklist":
         items = spec.get("items", [])
         rows = "".join(
             f'<span class="n{" last" if i == len(items) - 1 else ""}">{i + 1:02d}</span><span class="{"last" if i == len(items) - 1 else ""}">{esc(t)}</span>'
             for i, t in enumerate(items))
-        inner = f'<p class="title long" style="font-size:44px">{title}</p><div class="list">{rows}</div>'
+        inner = f'<p class="title listtitle">{title}</p><div class="list">{rows}</div>'
     elif lay == "quote":
-        inner = f'<p class="quote">{title}</p>' + (f'<p class="body" style="font-size:22px;font-family:PlexMono,monospace;color:#5E5850">{body}</p>' if body else "")
+        inner = f'<p class="quote">{title}</p>' + (f'<p class="body attr">{body}</p>' if body else "")
     else:
         raise ValueError(f"unknown layout {lay}")
     footer = esc(spec.get("footer", "Fractional controller  ·  English / Español"))
-    return f"""<!doctype html><html><head><meta charset="utf-8"><style>{CSS}</style></head><body>
+    cls = ' class="ig"' if spec.get("format") == "ig" else ""
+    return f"""<!doctype html><html{cls}><head><meta charset="utf-8"><style>{CSS}</style></head><body>
 <div class="margin"></div>
 <div class="page">
   <p class="kicker">{esc(spec.get("kicker"))}</p>
@@ -91,8 +118,13 @@ def main():
     out = pathlib.Path(sys.argv[2]); out.mkdir(parents=True, exist_ok=True)
     with sync_playwright() as p:
         b = p.chromium.launch()
-        pg = b.new_page(viewport={"width": 1200, "height": 627})
+        pages = {}
         for s in specs:
+            fmt = s.get("format", "li")
+            if fmt not in pages:
+                w, h = (1080, 1350) if fmt == "ig" else (1200, 627)
+                pages[fmt] = b.new_page(viewport={"width": w, "height": h})
+            pg = pages[fmt]
             pg.set_content(build(s), wait_until="load")
             pg.evaluate("document.fonts.ready")
             pg.wait_for_timeout(150)
