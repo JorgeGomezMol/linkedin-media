@@ -1,0 +1,4 @@
+# Serenium v2: old URLs
+Redirect 301 /for-msps /approach/
+Redirect 301 /drift-report /services/
+Redirect 301 /preview-v2 /

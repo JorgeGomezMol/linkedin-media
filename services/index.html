@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Services & pricing · Serenium</title>
+<meta name="description" content="Financial Operations Assessment, Monthly Close & Reporting, Fractional Controller and Cleanup & Implementation, with published prices.">
+<meta property="og:title" content="Services & pricing · Serenium">
+<meta property="og:description" content="Financial Operations Assessment, Monthly Close & Reporting, Fractional Controller and Cleanup & Implementation, with published prices.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://sereniumfinance.com/services/">
+<link rel="canonical" href="https://sereniumfinance.com/services/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns=%27http://www.w3.org/2000/svg%27%20viewBox=%270%200%2064%2064%27%3E%3Ccircle%20cx=%2732%27%20cy=%2732%27%20r=%2729%27%20fill=%27%230C1017%27%20stroke=%27%239CC3AE%27%20stroke-width=%272.4%27/%3E%3Cpath%20transform=%27matrix(-1%200%200%201%2064%200)%27%20d=%27M32%203a14.5%2014.5%200%200%201%200%2029a14.5%2014.5%200%200%200%200%2029%27%20fill=%27none%27%20stroke=%27%23F2F4F7%27%20stroke-width=%272.6%27%20stroke-linecap=%27round%27/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Libre+Caslon+Display&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0C1017; --surface:#141A23; --surface-2:#18202B;
+  --text:#F2F4F7; --text-2:#C3CAD4; --muted:#9AA4B2;
+  --accent:#9CC3AE; --accent-ink:#0C1017;
+  --line:rgba(255,255,255,.10);
+  --glass-bg:rgba(255,255,255,.07); --glass-border:rgba(255,255,255,.16); --glass-blur:20px; --radius:20px;
+  --serif:'Libre Caslon Display', Georgia, 'Times New Roman', serif;
+  --sans:'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font-family:var(--sans);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;font-variant-numeric:tabular-nums}
+a{color:inherit}
+.mesh{position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none}
+.mesh i{position:absolute;border-radius:50%;filter:blur(110px);opacity:.55}
+.mesh .a{width:620px;height:620px;left:-160px;top:-180px;background:#1F3B66}
+.mesh .b{width:520px;height:520px;right:-140px;top:120px;background:#2E5A4A}
+.mesh .c{width:560px;height:560px;left:30%;bottom:-260px;background:#1A2D4D;opacity:.45}
+.glass{background:var(--glass-bg);backdrop-filter:blur(var(--glass-blur)) saturate(140%);-webkit-backdrop-filter:blur(var(--glass-blur)) saturate(140%);border:1px solid var(--glass-border);border-radius:var(--radius);box-shadow:0 8px 32px rgba(0,0,0,.28)}
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){.glass{background:#1a1f2b}}
+.wrap{max-width:1160px;margin:0 auto;padding:0 32px}
+
+/* nav */
+header{position:sticky;top:16px;z-index:10;padding:0 16px}
+.nav{max-width:1160px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:10px 12px 10px 16px}
+.brand{text-decoration:none;display:flex;align-items:center;gap:12px;min-width:0}
+.mark{width:40px;height:40px;flex:none;display:block}
+.brand .name{display:flex;flex-direction:column;line-height:1}
+.brand b{font-family:var(--serif);font-weight:400;font-size:24px;letter-spacing:.01em}
+.brand small{font-size:10.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--text-2);margin-top:5px;white-space:nowrap}
+.links{display:flex;align-items:center;gap:26px;font-size:15px}
+.links a{text-decoration:none;color:var(--text-2)}
+.links a:hover{color:var(--text)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:46px;padding:0 22px;border-radius:12px;font-weight:600;font-size:15px;text-decoration:none;transition:background .2s}
+.btn.primary{background:var(--accent);color:var(--accent-ink)}
+.btn{text-align:center}
+.nav-cta .s{display:none}
+.btn.primary:hover{background:#B4D4C2}
+.btn.ghost{border:1px solid var(--glass-border);color:var(--text)}
+.btn.ghost:hover{background:rgba(255,255,255,.06)}
+
+/* hero */
+.hero{padding:112px 0 96px}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:56px;align-items:center}
+.kicker{font-size:13px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin:0 0 20px}
+h1{font-family:var(--serif);font-weight:400;font-size:clamp(40px,6vw,70px);line-height:1.05;letter-spacing:-.01em;margin:0}
+.lead{font-size:20px;color:var(--text-2);max-width:560px;margin:28px 0 0}
+.cta{display:flex;flex-wrap:wrap;gap:14px;margin-top:36px}
+.card{padding:32px}
+.card .q{font-family:var(--serif);font-size:29px;line-height:1.22;margin:0 0 22px}
+.facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:var(--line);border-radius:14px;overflow:hidden}
+.facts div{background:rgba(12,16,23,.72);padding:18px;min-width:0}
+.facts b{display:block;font-family:var(--serif);font-weight:400;font-size:30px;line-height:1}
+.facts span{display:block;font-size:13px;color:var(--text-2);margin-top:8px}
+
+/* secciones sólidas */
+section.solid{background:var(--surface);border-top:1px solid var(--line);padding:96px 0}
+h2{font-family:var(--serif);font-weight:400;font-size:clamp(32px,4vw,46px);line-height:1.1;margin:0 0 14px}
+.sub{color:var(--text-2);font-size:18px;max-width:640px;margin:0 0 48px}
+
+/* precios: cada dato dentro de su tarjeta */
+.plans{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
+.plan{background:var(--surface-2);border:1px solid var(--line);border-radius:var(--radius);padding:26px;display:flex;flex-direction:column;min-width:0;transition:border-color .2s}
+.plan:hover{border-color:rgba(156,195,174,.5)}
+.plan .tag,.plan .tag-space{align-self:flex-start;font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-ink);background:var(--accent);padding:4px 10px;border-radius:999px;margin-bottom:14px}
+.plan .tag-space{visibility:hidden}
+.plan h3{font-size:18px;font-weight:600;line-height:1.3;margin:0;min-height:2.6em}
+.price{margin:18px 0 16px;padding:14px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.price .amt{display:block;font-family:var(--serif);font-size:clamp(24px,2.3vw,30px);line-height:1.1;overflow-wrap:anywhere}
+.price .unit{display:block;font-size:13px;color:var(--muted);margin-top:6px}
+.plan p{color:var(--text-2);font-size:15px;line-height:1.55;margin:0}
+.plan .fit{margin-top:auto;padding-top:16px;font-size:13px;color:var(--muted)}
+.note{color:var(--muted);font-size:14px;margin:28px 0 0}
+
+/* contacto */
+section.contact{padding:96px 0}
+.contact-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:48px;align-items:start}
+.ways{display:grid;gap:14px}
+.way{display:flex;align-items:center;gap:18px;padding:20px 22px;background:var(--surface);border:1px solid var(--line);border-radius:16px;text-decoration:none;transition:border-color .2s}
+.way:hover{border-color:rgba(156,195,174,.5)}
+.way svg{width:26px;height:26px;flex:none;color:var(--accent)}
+.way b{display:block;font-weight:600;font-size:16px}
+.way span{display:block;color:var(--text-2);font-size:15px;overflow-wrap:anywhere}
+.way.primary{background:var(--accent);border-color:var(--accent)}
+.way.primary svg,.way.primary b,.way.primary span{color:var(--accent-ink)}
+
+footer{border-top:1px solid var(--line);padding:36px 0 96px;color:var(--muted);font-size:13px}
+footer .row{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
+
+/* WhatsApp flotante (sólido, sin desenfoque) */
+.wa-float{position:fixed;right:18px;bottom:18px;z-index:20;display:inline-flex;align-items:center;gap:8px;min-height:48px;padding:0 18px;border-radius:999px;background:var(--surface-2);border:1px solid var(--glass-border);color:var(--text);font-weight:600;font-size:14px;text-decoration:none;box-shadow:0 8px 24px rgba(0,0,0,.35)}
+.wa-float svg{width:20px;height:20px;color:var(--accent)}
+
+@media (max-width:1080px){.plans{grid-template-columns:repeat(2,minmax(0,1fr))}.plan h3{min-height:0}.plan .tag-space{display:none}}
+@media (max-width:900px){.hero-grid,.contact-grid{grid-template-columns:minmax(0,1fr)}.links .hide-m{display:none}.hero{padding:72px 0 64px}}
+@media (max-width:560px){
+  .wrap{padding:0 16px}
+  .nav{padding:8px 8px 8px 10px}
+  .mark{width:34px;height:34px}
+  .brand{gap:9px}
+  .brand b{font-size:20px}
+  .brand small{font-size:9px;letter-spacing:.1em}
+  .links .btn{min-height:40px;padding:0 14px;font-size:13px}
+  .nav-cta .l{display:none}.nav-cta .s{display:inline}
+  .btn{padding:10px 18px;line-height:1.3}
+  .card{padding:22px}.card .q{font-size:23px}
+  .lead{font-size:18px}
+  .plans{grid-template-columns:minmax(0,1fr)}
+  .wa-float span{display:none}.wa-float{padding:0 14px}
+}
+
+.brand b .dot{color:var(--accent)}
+.page-hero{padding:104px 0 56px}
+.page-hero h1{font-size:clamp(38px,5vw,60px);max-width:860px}
+.page-hero .lead{max-width:680px}
+.cols{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.cols2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.box{background:var(--surface-2);border:1px solid var(--line);border-radius:var(--radius);padding:26px;min-width:0}
+.box h3{font-size:18px;font-weight:600;margin:0 0 8px;line-height:1.35}
+.box p{color:var(--text-2);font-size:15.5px;margin:0}
+.box .n{display:block;font-family:var(--serif);font-size:30px;color:var(--accent);line-height:1;margin-bottom:14px}
+.compare{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.compare .box h3{display:flex;align-items:center;gap:10px}
+.compare ul,.incl{list-style:none;padding:0;margin:14px 0 0}
+.compare li,.incl li{position:relative;padding:9px 0 9px 26px;border-top:1px solid var(--line);color:var(--text-2);font-size:15.5px}
+.compare li::before,.incl li::before{content:"";position:absolute;left:2px;top:19px;width:12px;height:2px;background:var(--muted)}
+.compare .us li::before,.incl li::before{background:var(--accent)}
+.compare .us{border-color:rgba(156,195,174,.45)}
+.band{background:var(--surface-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:56px 0}
+.band .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:20px 40px}
+.band p{font-family:var(--serif);font-size:clamp(24px,3vw,34px);line-height:1.25;margin:0;max-width:760px}
+.timeline{list-style:none;padding:0;margin:0;border-left:2px solid var(--line)}
+.timeline li{position:relative;padding:0 0 30px 32px}
+.timeline li::before{content:"";position:absolute;left:-7px;top:8px;width:12px;height:12px;border-radius:50%;background:var(--bg);border:2px solid var(--accent)}
+.timeline .d{font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
+.timeline h3{font-size:19px;font-weight:600;margin:4px 0 6px}
+.timeline p{color:var(--text-2);margin:0;font-size:15.5px}
+.split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:56px;align-items:start}
+.offer{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:40px;padding:36px;margin-bottom:22px;background:var(--surface-2);border:1px solid var(--line);border-radius:var(--radius)}
+.offer.lead-offer{border-color:rgba(156,195,174,.45)}
+.offer h2{font-size:clamp(28px,3vw,36px)}
+.offer .price{margin:10px 0 18px}
+.offer p{color:var(--text-2);margin:0 0 12px}
+.about-grid{display:grid;grid-template-columns:minmax(0,360px) minmax(0,1fr);gap:56px;align-items:start}
+.portrait img{width:100%;height:auto;aspect-ratio:1/1;object-fit:cover;border-radius:var(--radius);border:1px solid var(--line);display:block}
+.prose p{color:var(--text-2);margin:0 0 16px}
+.prose p.big{font-family:var(--serif);font-size:clamp(24px,2.6vw,30px);line-height:1.3;color:var(--text)}
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
+.chips span{font-size:13px;font-weight:500;padding:7px 12px;border-radius:999px;border:1px solid var(--line);color:var(--text-2);background:var(--surface-2)}
+.quote{padding:30px 32px}
+.quote p{font-family:var(--serif);font-size:clamp(22px,2.4vw,28px);line-height:1.3;margin:0}
+.quote span{display:block;margin-top:14px;font-size:14px;color:var(--text-2)}
+.faq details{border-top:1px solid var(--line);padding:18px 0}
+.faq details:last-child{border-bottom:1px solid var(--line)}
+.faq summary{cursor:pointer;font-weight:600;font-size:17px;list-style:none;display:flex;justify-content:space-between;gap:16px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";color:var(--accent);font-size:22px;line-height:1}
+.faq details[open] summary::after{content:"–"}
+.faq p{color:var(--text-2);margin:12px 0 0;max-width:820px}
+form.contact-form{display:grid;gap:14px}
+.field label{display:block;font-size:14px;font-weight:600;margin-bottom:6px}
+.field input,.field select,.field textarea{width:100%;font:inherit;font-size:16px;color:var(--text);background:var(--bg);border:1px solid rgba(255,255,255,.22);border-radius:12px;padding:12px 14px}
+.field textarea{min-height:120px;resize:vertical}
+.field input:focus,.field select:focus,.field textarea:focus{outline:2px solid var(--accent);outline-offset:1px;border-color:transparent}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.form-box{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:28px}
+.formmsg{border-radius:12px;padding:14px 16px;margin-bottom:16px;font-size:15px;display:none}
+.formmsg.ok{display:block;background:rgba(156,195,174,.16);border:1px solid rgba(156,195,174,.5)}
+.formmsg.err{display:block;background:rgba(220,120,120,.14);border:1px solid rgba(220,120,120,.5)}
+footer .grid{display:grid;grid-template-columns:minmax(0,1.4fr) repeat(2,minmax(0,1fr));gap:32px;margin-bottom:28px}
+footer h4{color:var(--text);font-size:14px;margin:0 0 10px}
+footer ul{list-style:none;margin:0;padding:0}
+footer li{margin:6px 0}
+footer a{text-decoration:none;color:var(--text-2)}
+footer a:hover{color:var(--text)}
+footer .legal{border-top:1px solid var(--line);padding-top:20px;line-height:1.6}
+.links a[aria-current="page"]{color:var(--text)}
+@media (max-width:900px){.cols,.cols2,.compare,.split,.offer,.about-grid{grid-template-columns:minmax(0,1fr)}.page-hero{padding:72px 0 40px}.offer{padding:26px;gap:18px}.about-grid{gap:32px}.portrait{max-width:340px}footer .grid{grid-template-columns:minmax(0,1fr)}}
+</style>
+</head>
+<body>
+<div class="mesh" aria-hidden="true"><i class="a"></i><i class="b"></i><i class="c"></i></div>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="i-cal" viewBox="0 0 24 24"><rect x="3" y="4.5" width="18" height="16" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M3 9.5h18M8 2.8v3.4M16 2.8v3.4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></symbol>
+  <symbol id="i-wa" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2.2A9.8 9.8 0 0 0 3.6 17l-1.4 4.8 4.9-1.3A9.8 9.8 0 1 0 12 2.2zm0 17.8a8 8 0 0 1-4.1-1.1l-.3-.2-2.9.8.8-2.8-.2-.3A8 8 0 1 1 12 20zm4.4-6c-.2-.1-1.4-.7-1.7-.8-.2-.1-.4-.1-.5.1l-.8 1c-.1.2-.3.2-.5.1a6.6 6.6 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.5-.4h-.5a.9.9 0 0 0-.7.3 2.8 2.8 0 0 0-.9 2.1 4.9 4.9 0 0 0 1 2.6 11.2 11.2 0 0 0 4.3 3.8c1.6.7 2.2.7 3 .6.5-.1 1.4-.6 1.6-1.1.2-.5.2-1 .1-1.1l-.5-.3z"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M3.8 6.5 12 12.5l8.2-6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></symbol>
+</svg>
+<header>
+  <div class="nav glass">
+    <a class="brand" href="/" aria-label="Serenium, Bookkeeping &amp; Accounting, home"><svg class="mark" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="29" fill="rgba(255,255,255,.05)" stroke="#9CC3AE" stroke-width="2.4"/><path transform="matrix(-1 0 0 1 64 0)" d="M32 3a14.5 14.5 0 0 1 0 29a14.5 14.5 0 0 0 0 29" fill="none" stroke="#F2F4F7" stroke-width="2.6" stroke-linecap="round"/></svg><span class="name"><b>Serenium</b><small>Bookkeeping &amp; Accounting</small></span></a>
+    <nav class="links" aria-label="Main">
+      <a class="hide-m" href="/services/" aria-current="page">Services</a><a class="hide-m" href="/approach/">Approach</a><a class="hide-m" href="/about/">About</a><a class="hide-m" href="/contact/">Contact</a>
+      <a class="btn primary nav-cta" href="/contact/?topic=assessment"><span class="l">Request an Assessment</span><span class="s">Contact</span></a>
+    </nav>
+  </div>
+</header>
+<main>
+
+<section class="page-hero">
+  <div class="wrap">
+    <p class="kicker">Services &amp; pricing</p>
+    <h1>Fixed prices. Scope in writing. No hourly surprises.</h1>
+    <p class="lead">Every engagement starts the same way: a fixed-price Assessment that shows you where your books stand. From there, you decide whether to continue.</p>
+  </div>
+</section>
+<section class="solid">
+  <div class="wrap">
+    <article class="offer lead-offer">
+  <div><span class="tag" style="font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-ink);background:var(--accent);padding:4px 10px;border-radius:999px;display:inline-block;margin-bottom:14px">Start here</span><h2>Financial Operations Assessment</h2><div class="price"><span class="amt">$1,500–$2,500</span><span class="unit">one time · fixed price, quoted before we start</span></div><p>A 10-day diagnostic of the real state of your books: reconciliations, the close process, and how your operating systems feed the ledger. You get a written report of what's wrong, quantified, with the root cause of each finding.</p><p style="color:var(--muted);font-size:14px">No obligation to continue. Sold on judgment, not software.</p></div>
+  <div><h3 style="font-size:15px;font-weight:600;margin:0;color:var(--text)">What's included</h3><ul class="incl"><li>Every balance sheet account and its reconciliation, checked one by one</li><li>Close process: what happens, when, and by whom</li><li>Integration check between your operating systems and the ledger</li><li>Findings quantified in dollars, with root causes</li><li>A prioritized fix plan and a walkthrough call</li></ul></div>
+</article>
+    <article class="offer">
+  <div><h2>Monthly Close &amp; Reporting</h2><div class="price"><span class="amt">$2,000–$3,500</span><span class="unit">per month · 6-month minimum</span></div><p>The monthly accounting function, done properly and on schedule.</p><p style="color:var(--muted);font-size:14px">For businesses from $1M to $4M in revenue.</p></div>
+  <div><h3 style="font-size:15px;font-weight:600;margin:0;color:var(--text)">What's included</h3><ul class="incl"><li>Month-end close on a fixed date</li><li>Bank, card, loan and system reconciliations</li><li>Accounts payable and receivable</li><li>Monthly P&amp;L, balance sheet and cash flow</li><li>Year-end package for your CPA</li></ul></div>
+</article>
+    <article class="offer">
+  <div><h2>Fractional Controller</h2><div class="price"><span class="amt">$4,400–$6,500</span><span class="unit">per month · 6-month minimum</span></div><p>The controller you'd hire if you were big enough to justify one full time.</p><p style="color:var(--muted);font-size:14px">For businesses from $4M to $15M in revenue. The main offer.</p></div>
+  <div><h3 style="font-size:15px;font-weight:600;margin:0;color:var(--text)">What's included</h3><ul class="incl"><li>Everything in Monthly Close &amp; Reporting</li><li>Margins by client and by service line</li><li>Budget and cash flow forecast</li><li>Internal controls design</li><li>Reconciled KPIs</li><li>A monthly meeting with the owner</li></ul></div>
+</article>
+    <article class="offer">
+  <div><h2>Cleanup &amp; Implementation</h2><div class="price"><span class="amt">$4,000–$15,000</span><span class="unit">per project · fixed quote</span></div><p>For books that need rebuilding before they can be maintained. Usually follows an Assessment.</p><p style="color:var(--muted);font-size:14px">Scoped and priced after the Assessment.</p></div>
+  <div><h3 style="font-size:15px;font-weight:600;margin:0;color:var(--text)">What's included</h3><ul class="incl"><li>Historical cleanup and catch-up</li><li>Re-mapping integrations into the ledger</li><li>Process documentation and SOPs</li><li>System migrations, e.g. desktop to cloud</li></ul></div>
+</article>
+  </div>
+</section>
+<section class="solid" style="border-top:0;padding-top:0">
+  <div class="wrap">
+    <p class="kicker">How pricing works</p>
+    <h2>A few rules, stated up front.</h2>
+    <div class="cols" style="margin-top:32px">
+      <div class="box"><h3>No hourly billing</h3><p>Monthly packages or fixed project prices. You know the number before we start.</p></div>
+      <div class="box"><h3>Nothing below $2,000 a month</h3><p>We take on 8 to 10 accounts in total. Every spot goes to a client who needs controller-level work.</p></div>
+      <div class="box"><h3>6-month minimum</h3><p>A clean close takes a few cycles to settle. Six months is enough to prove it works.</p></div>
+    </div>
+    <p class="note">We don't prepare income tax returns or perform audits. We work alongside your CPA or tax preparer and hand them clean, reconciled books.</p>
+  </div>
+</section>
+
+<section class="contact">
+  <div class="wrap contact-grid">
+    <div>
+      <p class="kicker">Contact</p>
+      <h2>Let's look at your numbers.</h2>
+      <p class="sub" style="margin-bottom:0">Start with a 30-minute call. We'll talk about your business, your books and whether an Assessment makes sense. No preparation needed.</p>
+    </div>
+    <div class="ways">
+      <a class="way primary" href="https://app.onecal.io/b/jorge-gomez/jorge-gomez-lets-talk" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-cal"/></svg><span><b>Book a 30-minute call</b><span>Pick a time on my calendar · U.S. Eastern</span></span></a>
+      <a class="way" href="https://wa.me/18402746945?text=Hi%20Jorge%2C%20I%20saw%20the%20Serenium%20website%20and%20would%20like%20to%20talk%20about%20my%20company%27s%20accounting." target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-wa"/></svg><span><b>WhatsApp or text</b><span>+1 (840) 274-6945</span></span></a>
+      <a class="way" href="mailto:hello@sereniumfinance.com"><svg aria-hidden="true"><use href="#i-mail"/></svg><span><b>Email</b><span>hello@sereniumfinance.com</span></span></a>
+    </div>
+  </div>
+</section>
+
+</main>
+<footer>
+  <div class="wrap">
+    <div class="grid">
+      <div><a class="brand" href="/" aria-label="Serenium, Bookkeeping &amp; Accounting, home"><svg class="mark" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="29" fill="rgba(255,255,255,.05)" stroke="#9CC3AE" stroke-width="2.4"/><path transform="matrix(-1 0 0 1 64 0)" d="M32 3a14.5 14.5 0 0 1 0 29a14.5 14.5 0 0 0 0 29" fill="none" stroke="#F2F4F7" stroke-width="2.6" stroke-linecap="round"/></svg><span class="name"><b>Serenium</b><small>Bookkeeping &amp; Accounting</small></span></a><p style="margin:14px 0 0;max-width:380px">Controller-level bookkeeping and accounting for a small number of U.S. businesses.</p></div>
+      <div><h4>Practice</h4><ul><li><a href="/services/">Services &amp; pricing</a></li><li><a href="/approach/">Approach</a></li><li><a href="/about/">About</a></li></ul></div>
+      <div><h4>Contact</h4><ul><li><a href="https://app.onecal.io/b/jorge-gomez/jorge-gomez-lets-talk" target="_blank" rel="noopener">Book a 30-minute call</a></li><li><a href="https://wa.me/18402746945?text=Hi%20Jorge%2C%20I%20saw%20the%20Serenium%20website%20and%20would%20like%20to%20talk%20about%20my%20company%27s%20accounting." target="_blank" rel="noopener">WhatsApp +1 (840) 274-6945</a></li><li><a href="mailto:hello@sereniumfinance.com">hello@sereniumfinance.com</a></li></ul></div>
+    </div>
+    <p class="legal">Serenium Finance is a trade name of Serenium Management Group LLC, a U.S.-registered (Wyoming) company. All services are delivered remotely. Serenium is not a CPA firm and does not provide audit, attest or income tax return services. QuickBooks, Xero and ConnectWise are trademarks of their respective owners; Serenium is not affiliated with or endorsed by them. © <span id="yr">2026</span> Serenium Management Group LLC.</p>
+  </div>
+</footer>
+<a class="wa-float" href="https://wa.me/18402746945?text=Hi%20Jorge%2C%20I%20saw%20the%20Serenium%20website%20and%20would%20like%20to%20talk%20about%20my%20company%27s%20accounting." target="_blank" rel="noopener" aria-label="WhatsApp +1 (840) 274-6945"><svg aria-hidden="true"><use href="#i-wa"/></svg><span>WhatsApp</span></a>
+<script>document.getElementById('yr').textContent=new Date().getFullYear();</script>
+</body>
+</html>
