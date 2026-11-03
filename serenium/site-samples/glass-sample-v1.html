@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Serenium · Design sample</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Libre+Caslon+Display&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0C1017; --surface:#141A23; --surface-2:#18202B;
+  --text:#F2F4F7; --text-2:#C3CAD4; --muted:#9AA4B2;
+  --accent:#9CC3AE; --accent-ink:#0C1017;
+  --line:rgba(255,255,255,.10);
+  --glass-bg:rgba(255,255,255,.07); --glass-bg-alt:rgba(255,255,255,.12);
+  --glass-border:rgba(255,255,255,.16); --glass-blur:20px; --radius:20px;
+  --serif:'Libre Caslon Display', Georgia, 'Times New Roman', serif;
+  --sans:'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font-family:var(--sans);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;font-variant-numeric:tabular-nums}
+a{color:inherit}
+/* fondo de malla: fijo, sin animación */
+.mesh{position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none}
+.mesh i{position:absolute;border-radius:50%;filter:blur(110px);opacity:.55}
+.mesh .a{width:620px;height:620px;left:-160px;top:-180px;background:#1F3B66}
+.mesh .b{width:520px;height:520px;right:-140px;top:120px;background:#2E5A4A}
+.mesh .c{width:560px;height:560px;left:30%;bottom:-260px;background:#1A2D4D;opacity:.45}
+.glass{background:var(--glass-bg);backdrop-filter:blur(var(--glass-blur)) saturate(140%);-webkit-backdrop-filter:blur(var(--glass-blur)) saturate(140%);border:1px solid var(--glass-border);border-radius:var(--radius);box-shadow:0 8px 32px rgba(0,0,0,.28)}
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){.glass{background:#1a1f2b}}
+.wrap{max-width:1160px;margin:0 auto;padding:0 32px}
+/* nav (vidrio 1) */
+header{position:sticky;top:16px;z-index:10;padding:0 16px}
+.nav{max-width:1160px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px 14px 12px 24px}
+.brand{text-decoration:none;display:flex;align-items:baseline;gap:8px}
+.brand b{font-family:var(--serif);font-weight:400;font-size:26px;border-bottom:3px double var(--text);line-height:1.1}
+.brand span{font-size:13px;color:var(--muted);letter-spacing:.02em}
+.links{display:flex;align-items:center;gap:28px;font-size:15px}
+.links a{text-decoration:none;color:var(--text-2)}
+.links a:hover{color:var(--text)}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:46px;padding:0 22px;border-radius:12px;font-weight:600;font-size:15px;text-decoration:none;transition:background .2s, transform .2s}
+.btn.primary{background:var(--accent);color:var(--accent-ink)}
+.btn.primary:hover{background:#B4D4C2}
+.btn.ghost{border:1px solid var(--glass-border);color:var(--text)}
+.btn.ghost:hover{background:var(--glass-bg)}
+/* hero */
+.hero{padding:120px 0 96px}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:56px;align-items:center}
+.kicker{font-size:13px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin:0 0 20px}
+h1{font-family:var(--serif);font-weight:400;font-size:clamp(42px,6vw,72px);line-height:1.04;letter-spacing:-.01em;margin:0}
+.lead{font-size:20px;color:var(--text-2);max-width:560px;margin:28px 0 0}
+.cta{display:flex;flex-wrap:wrap;gap:14px;margin-top:36px}
+/* tarjeta de vidrio del hero (vidrio 2) */
+.card{padding:32px}
+.card .q{font-family:var(--serif);font-size:30px;line-height:1.2;margin:0 0 22px}
+.facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:var(--line);border-radius:14px;overflow:hidden}
+.facts div{background:rgba(12,16,23,.72);padding:18px}
+.facts b{display:block;font-family:var(--serif);font-weight:400;font-size:32px;line-height:1}
+.facts span{display:block;font-size:13px;color:var(--text-2);margin-top:8px}
+/* sección sólida: el texto de lectura va aquí, no sobre vidrio */
+section.solid{background:var(--surface);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:96px 0}
+h2{font-family:var(--serif);font-weight:400;font-size:clamp(32px,4vw,46px);line-height:1.1;margin:0 0 14px}
+.sub{color:var(--text-2);font-size:18px;max-width:640px;margin:0 0 48px}
+.plans{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(250px,100%),1fr));gap:18px}
+.plan{background:var(--surface-2);border:1px solid var(--line);border-radius:var(--radius);padding:28px;display:flex;flex-direction:column;gap:10px;transition:border-color .2s, transform .2s}
+.plan:hover{border-color:rgba(156,195,174,.5);transform:translateY(-2px)}
+.plan .tag{align-self:flex-start;font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-ink);background:var(--accent);padding:4px 10px;border-radius:999px}
+.plan h3{font-size:19px;font-weight:600;margin:6px 0 0}
+.plan .amt{font-family:var(--serif);font-size:28px;line-height:1.15;margin:8px 0 2px;white-space:nowrap}
+.plan .amt small{font-family:var(--sans);font-size:14px;color:var(--muted)}
+.plan p{color:var(--text-2);font-size:15px;margin:0}
+.note{color:var(--muted);font-size:14px;margin-top:28px}
+footer{padding:40px 0;color:var(--muted);font-size:13px}
+@media (max-width:900px){.hero-grid{grid-template-columns:minmax(0,1fr)}.links .hide-m{display:none}.hero{padding:72px 0 64px}}
+@media (max-width:560px){.wrap{padding:0 16px}.nav{padding:10px 10px 10px 16px}.brand span{display:none}.btn{min-height:44px;padding:0 16px;font-size:14px}.card{padding:22px}.card .q{font-size:24px}.lead{font-size:18px}
+  /* en celular, máximo dos elementos con desenfoque: nav + tarjeta */
+}
+</style>
+</head>
+<body>
+<div class="mesh" aria-hidden="true"><i class="a"></i><i class="b"></i><i class="c"></i></div>
+
+<header>
+  <div class="nav glass">
+    <a class="brand" href="#"><b>Serenium</b><span>finance</span></a>
+    <nav class="links" aria-label="Main">
+      <a class="hide-m" href="#">Services</a>
+      <a class="hide-m" href="#">Approach</a>
+      <a class="hide-m" href="#">About</a>
+      <a class="btn primary" href="#">Request an Assessment</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <p class="kicker">Fractional controller · U.S. businesses</p>
+      <h1>Controller-level accounting for a small number of clients.</h1>
+      <p class="lead">A deliberately small practice for U.S. businesses from $1M to $15M. Clean books, closed on schedule, and numbers you can act on, without the cost of a full-time controller.</p>
+      <div class="cta">
+        <a class="btn primary" href="#">Request a Financial Operations Assessment</a>
+        <a class="btn ghost" href="#">See services and pricing</a>
+      </div>
+    </div>
+    <div class="card glass">
+      <p class="q">Most bookkeepers tell you what happened. We tell you whether to believe it.</p>
+      <div class="facts">
+        <div><b>8–10</b><span>client accounts, total. That is the whole model.</span></div>
+        <div><b>8+ yrs</b><span>controller-level work for U.S. companies</span></div>
+        <div><b>10 days</b><span>for a fixed-price assessment of your books</span></div>
+        <div><b>Remote</b><span>U.S.-registered, U.S. Eastern hours</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="solid">
+  <div class="wrap">
+    <p class="kicker">Services</p>
+    <h2>Four ways to work together.</h2>
+    <p class="sub">Fixed prices and monthly packages, scoped in writing. No hourly billing, and nothing below $2,000 a month.</p>
+    <div class="plans">
+      <article class="plan"><span class="tag">Start here</span><h3>Financial Operations Assessment</h3><p class="amt">$1,500–$2,500 <small>one time</small></p><p>Ten days. What's wrong in your books, quantified, with the root cause of each finding.</p></article>
+      <article class="plan"><h3>Monthly Close &amp; Reporting</h3><p class="amt">$2,000–$3,500 <small>/ month</small></p><p>Close, reconciliations, AP/AR and a monthly reporting package. For $1M–$4M businesses.</p></article>
+      <article class="plan"><h3>Fractional Controller</h3><p class="amt">$4,400–$6,500 <small>/ month</small></p><p>Margins, forecasts, internal controls and a monthly meeting with the owner. For $4M–$15M businesses.</p></article>
+      <article class="plan"><h3>Cleanup &amp; Implementation</h3><p class="amt">$4,000–$15,000 <small>project</small></p><p>Historical cleanup, integration re-mapping, process documentation and migrations.</p></article>
+    </div>
+    <p class="note">Serenium is not a CPA firm and does not provide audit, attest or tax return services. We work alongside your CPA.</p>
+  </div>
+</section>
+</main>
+<footer><div class="wrap">Design sample · not the final site</div></footer>
+</body>
+</html>
